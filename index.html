@@ -15,83 +15,84 @@
     <header class="bg-dark">
         <h1 class="text-white text-center pt-2 pb-2">Weather Dashboard</h1>
     </header>
-    <main>
-        <div class="container">
-            <div class="row">
-                <!--Search and Saved Cities-->
-                <div class="col-4 bg-light">
-                    <div class="row">
-                        <h3>Search for a City:</h3>
-                        <form class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Please Enter a City"
-                                aria-label="Please Enter a City" aria-describedby="button-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button"
-                                    id="city-submit-btn"><span class="oi oi-magnifying-glass"></span></button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row">
-                        <ul></ul>
-                    </div>
-                </div>
-                <!--Weather Report-->
-                <div class="col-8">
-                    <div class="border border-dark city-info-block">
-                        <div>
-                            <h2>Please Enter A City <span id="current-date"></span> <span id="current-symbol"></span>
-                            </h2>
+    <main class="container">
+        <div class="row">
+            <!--Search and Saved Cities-->
+            <div class="col-3 bg-light">
+                <div class="row">
+                    <h3>Search for a City:</h3>
+                    <form class="input-group mb-3" id="city-input-form">
+                        <input type="text" class="form-control" name="city-input" placeholder="Please Enter a City"
+                            aria-label="Please Enter a City" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="city-submit-btn"><span
+                                    class="oi oi-magnifying-glass"></span></button>
                         </div>
-                        <div>Temperature: <span id="current-temperature"></span></div>
-                        <div>Humidity: <span id="current-humidity"></span></div>
-                        <div>UV Index: <span id="current-uvindex"></span></div>
-                    </div>
-                    <div class="five-day-block">
-                        <h3>5-Day Forecast</h3>
-                        <div class="row">
-
-                            <div class="card mx-auto">
-                                <h4 class="card-header bg-dark text-light" id="date-1">N/A</h4>
-                                <span class="text-center" id="symbol-1">?</span>
-                                <h5>Temp: <span id="temp-1"></span></h5>
-                                <h5>Humidity: <span id="hum-1"></span></h5>
-                            </div>
-
-                            <div class="card mx-auto">
-                                <h4 class="card-header bg-dark text-light" id="date-2">N/A</h4>
-                                <span class="text-center" id="symbol-2">?</span>
-                                <h5>Temp: <span id="temp-2"></span></h5>
-                                <h5>Humidity: <span id="hum-2"></span></h5>
-                            </div>
-
-                            <div class="card mx-auto">
-                                <h4 class="card-header bg-dark text-light" id="date-3">N/A</h4>
-                                <span class="text-center" id="symbol-3">?</span>
-                                <h5>Temp: <span id="temp-3"></span></h5>
-                                <h5>Humidity: <span id="hum-3"></span></h5>
-                            </div>
-
-                            <div class="card mx-auto">
-                                <h4 class="card-header bg-dark text-light" id="date-4">N/A</h4>
-                                <span class="text-center" id="symbol-4">?</span>
-                                <h5>Temp: <span id="temp-4"></span></h5>
-                                <h5>Humidity: <span id="hum-4"></span></h5>
-                            </div>
-
-                            <div class="card mx-auto">
-                                <h4 class="card-header bg-dark text-light" id="date-5">N/A</h4>
-                                <span class="text-center" id="symbol-5">?</span>
-                                <h5>Temp: <span id="temp-5"></span></h5>
-                                <h5>Humidity: <span id="hum-5"></span></h5>
-                            </div>
-
-                        </div>
-                    </div>
+                    </form>
                 </div>
-
+                <div class="row">
+                    <ul></ul>
+                </div>
             </div>
+            <!--Weather Report-->
+            <div class="col-9">
+                <div class="border border-dark city-info-block">
+                    <div>
+                        <h2><span id="city-name">Please Enter A City</span> <span id="current-date"></span> <span
+                                id="current-symbol"></span>
+                        </h2>
+                    </div>
+                    <div>Temperature: <span id="current-temperature"></span></div>
+                    <div>Humidity: <span id="current-humidity"></span></div>
+                    <div>Wind Speed: <span id="current-wind"></span></div>
+                    <div>UV Index: <span class="text-white" id="current-uvindex"></span></div>
+                </div>
+                <div class="five-day-block">
+                    <h3>5-Day Forecast</h3>
+                    <div class="row">
+
+                        <div class="card mx-auto">
+                            <h4 class="card-header bg-dark text-light" id="date-1">N/A</h4>
+                            <span class="text-center" id="symbol-1">?</span>
+                            <h5>Temp: <span id="temp-1"></span></h5>
+                            <h5>Humidity: <span id="hum-1"></span></h5>
+                        </div>
+
+                        <div class="card mx-auto">
+                            <h4 class="card-header bg-dark text-light" id="date-2">N/A</h4>
+                            <span class="text-center" id="symbol-2">?</span>
+                            <h5>Temp: <span id="temp-2"></span></h5>
+                            <h5>Humidity: <span id="hum-2"></span></h5>
+                        </div>
+
+                        <div class="card mx-auto">
+                            <h4 class="card-header bg-dark text-light" id="date-3">N/A</h4>
+                            <span class="text-center" id="symbol-3">?</span>
+                            <h5>Temp: <span id="temp-3"></span></h5>
+                            <h5>Humidity: <span id="hum-3"></span></h5>
+                        </div>
+
+                        <div class="card mx-auto">
+                            <h4 class="card-header bg-dark text-light" id="date-4">N/A</h4>
+                            <span class="text-center" id="symbol-4">?</span>
+                            <h5>Temp: <span id="temp-4"></span></h5>
+                            <h5>Humidity: <span id="hum-4"></span></h5>
+                        </div>
+
+                        <div class="card mx-auto">
+                            <h4 class="card-header bg-dark text-light" id="date-5">N/A</h4>
+                            <span class="text-center" id="symbol-5">?</span>
+                            <h5>Temp: <span id="temp-5"></span></h5>
+                            <h5>Humidity: <span id="hum-5"></span></h5>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/weather.js"></script>
 </body>
