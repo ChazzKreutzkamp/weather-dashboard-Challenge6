@@ -29,7 +29,7 @@ var initalizeCitySearchList = function (cityList) {
         var buttonName = cityList[i].buttonNameId;
         listEl = document.createElement("li");
         buttonEl = document.createElement("button")
-        buttonEl.textContent = cityName;
+        buttonEl.textContent = buttonName;
         buttonEl.setAttribute("id", cityName);
         buttonEl.setAttribute("buttonId", buttonName);
         listEl.appendChild(buttonEl);
