@@ -58,7 +58,7 @@ var createListElement = function (cityName) {
     listEl = document.createElement("li");
     buttonEl = document.createElement("button")
     var buttonName = cityName;
-    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=5e858884005a9d64472a576b80548c7d')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=5e858884005a9d64472a576b80548c7d')
         .then(function (currentWeatherResponse) {
             if (currentWeatherResponse.ok) {
                 return currentWeatherResponse.json();
@@ -84,7 +84,7 @@ var createListElement = function (cityName) {
 }
 
 var getWeatherCall = function (cityName) {
-    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=5e858884005a9d64472a576b80548c7d')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=5e858884005a9d64472a576b80548c7d')
         .then(function (currentWeatherResponse) {
             if (currentWeatherResponse.ok) {
                 return currentWeatherResponse.json();
@@ -95,7 +95,7 @@ var getWeatherCall = function (cityName) {
         })
         .then(function (currentWeatherResponse) {
             currentWeatherReportUpdate(currentWeatherResponse);
-            return fetch('http://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid=5e858884005a9d64472a576b80548c7d')
+            return fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid=5e858884005a9d64472a576b80548c7d')
         }).then(function (fiveDayResponse) {
             if (fiveDayResponse.ok) {
                 return fiveDayResponse.json();
