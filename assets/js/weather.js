@@ -9,23 +9,35 @@ var cHumidityEl = document.querySelector("#current-humidity");
 var cWindEl = document.querySelector("#current-wind");
 var cUVIndexEl = document.querySelector("#current-uvindex");
 var cityInputFormEl = document.querySelector("#city-input-form");
+var cityListEl = document.querySelector("#city-list");
 
-var initialize = function() {
+var initialize = function () {
     var hardCodedCity = "New York City, New York";
-    cityList = localStorage.getItem("cityList");
-    if (!cityList){
+    cityList = JSON.parse(localStorage.getItem("cityList"));
+    if (!cityList) {
         getWeatherCall(hardCodedCity)
+        cityList = [];
     } else {
-        getWeatherCall(cityList[0]);
+        getWeatherCall(cityList[0].cityNameId);
         initalizeCitySearchList(cityList);
     }
 }
 
-var initalizeCitySearchList = function(cityList) {
-
+var initalizeCitySearchList = function (cityList) {
+    for (var i = 0; i < cityList.length; i++) {
+        var cityName = cityList[i].cityNameId;
+        var buttonName = cityList[i].buttonNameId;
+        listEl = document.createElement("li");
+        buttonEl = document.createElement("button")
+        buttonEl.textContent = cityName;
+        buttonEl.setAttribute("id", cityName);
+        buttonEl.setAttribute("buttonId", buttonName);
+        listEl.appendChild(buttonEl);
+        cityListEl.appendChild(listEl);
+    }
 }
 
-var inputHandler = function(event) {
+var inputHandler = function () {
     event.preventDefault();
     var cityName = document.querySelector("input[name='city-input']").value;
     if (!cityName) {
@@ -33,7 +45,42 @@ var inputHandler = function(event) {
     }
     else {
         getWeatherCall(cityName);
+        createListElement(cityName);
     }
+}
+
+var cityListHandler = function (event) {
+    var cityName = event.target.getAttribute("id");
+    getWeatherCall(cityName);
+}
+
+var createListElement = function (cityName) {
+    listEl = document.createElement("li");
+    buttonEl = document.createElement("button")
+    var buttonName = cityName;
+    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=5e858884005a9d64472a576b80548c7d')
+        .then(function (currentWeatherResponse) {
+            if (currentWeatherResponse.ok) {
+                return currentWeatherResponse.json();
+            }
+            else {
+                alert("Error: " + currentWeatherResponse.status);
+            }
+        })
+        .then(function (currentWeatherResponse) {
+            buttonName = currentWeatherResponse.name;
+            buttonEl.textContent = buttonName;
+            buttonEl.setAttribute("id", cityName);
+            buttonEl.setAttribute("buttonId", buttonName);
+            listEl.appendChild(buttonEl);
+            cityListEl.appendChild(listEl);
+            var buttonIds = {
+                cityNameId: cityName,
+                buttonNameId: buttonName
+            }
+            cityList.push(buttonIds);
+            localStorage.setItem("cityList", JSON.stringify(cityList));
+        })
 }
 
 var getWeatherCall = function (cityName) {
@@ -94,9 +141,8 @@ function getUVIndex(cityWeather) {
         },
         url: 'https://api.openuv.io/api/v1/uv?lat=' + lat + '&lng=' + lng,
         success: function (response) {
-            var uvIndex = response.result.uv;
+            var uvIndex = response.result.uv_max;
             uvIndex = Math.round(uvIndex * 100) / 100;
-            uvIndex = uvIndex;
             cUVIndexEl.textContent = uvIndex;
             $("#current-uvindex").removeClass("bg-success bg-warning bg-danger");
             if (uvIndex <= 2) {
@@ -118,7 +164,7 @@ function getUVIndex(cityWeather) {
 var fiveDayForecastUpdate = function (cityWeather) {
     for (var i = 0; i < 5; i++) {
         var listIndex = (i * 8);
-        var elementIncrementer = i+1;
+        var elementIncrementer = i + 1;
         var symbolEl = "#symbol-" + elementIncrementer;
         var tempEl = "#temp-" + elementIncrementer;
         var humidityEl = "#hum-" + elementIncrementer;
@@ -142,3 +188,4 @@ var fiveDayForecastUpdate = function (cityWeather) {
 
 initialize();
 cityInputFormEl.addEventListener("submit", inputHandler);
+cityListEl.addEventListener("click", cityListHandler);
