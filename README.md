@@ -12,5 +12,6 @@ initialized screen will default to their previous search (if there are no search
 being displayed is for New York City).
 
 link to the application: https://chazzkreutzkamp.github.io/weather-dashboard-Challenge6/
+
 screenshot:
 ![al text](https://github.com/ChazzKreutzkamp/weather-dashboard-Challenge6/blob/master/resources/ScreenShot.JPG)
